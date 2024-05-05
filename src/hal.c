@@ -11,16 +11,16 @@
 
 void targetInit(void) {
     targetPowerOff();
-    targetReset();
+    //targetReset();
 }
 
-void targetReset(void) {
+/*void targetReset(void) {
     digitalWrite(TARGET_RESET_Pin, LOW);
-}
+}*/
 
-void targetRestore(void) {
+/*void targetRestore(void) {
     digitalWrite(TARGET_RESET_Pin, HIGH);
-}
+}*/
 
 void targetPowerOff(void) {
     digitalWrite(TARGET_PWR_Pin, LOW);

@@ -126,11 +126,31 @@ static void swdDataRead(uint8_t* const data, uint8_t const len) {
 
 static void swdReset(void) {
     uint8_t i;
+    //JTAG to SWD sequence
+    const uint8_t jtag2swd[2] = {0x7bu,0x9eu};
+
+    //wait for raising edge on TARGET_RESET_Pin
+    //TODO: add a timeout here if your RESET line is not changeing
+    //if timeout has occured then disable this waiting completly
+    while(digitalRead(TARGET_RESET_Pin) != LOW){
+    };  
+    while(digitalRead(TARGET_RESET_Pin) == LOW){
+    };  
 
     MWAIT;
-    digitalWrite(SWCLK_Pin, HIGH);
     digitalWrite(SWDIO_Pin, HIGH);
+    digitalWrite(SWCLK_Pin, HIGH); //CLK 0->1
     MWAIT;
+
+    // 50 clk+x 
+    for (i = 0u; i < (52u); ++i) {
+        digitalWrite(SWCLK_Pin, HIGH); //CLK 0->1
+        MWAIT;
+        digitalWrite(SWCLK_Pin, LOW); //CLK 1->0
+        MWAIT;
+    }
+
+    swdDatasend(jtag2swd, 16u);
 
     /* 50 clk+x */
     for (i = 0u; i < (50u + 10u); ++i) {

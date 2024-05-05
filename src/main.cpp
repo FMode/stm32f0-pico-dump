@@ -15,11 +15,12 @@ extern "C" {
 }
 
 // STM32 target flash memory size in bytes
-uint32_t size = 32768;
+uint32_t size = 32768*6;
 
 // Usually the STM32F0x starts here.
 // If you're trying to dump another series check the datasheet.
-uint32_t flashAddress = 0x08000000;
+uint32_t flashAddress = 0x08010000; 
+                        
 
 void setup() {
     swdStatus_t status;
@@ -29,6 +30,8 @@ void setup() {
     pinMode(TARGET_PWR_Pin, OUTPUT);
     pinMode(SWDIO_Pin, OUTPUT);
     pinMode(SWCLK_Pin, OUTPUT);
+
+    pinMode(LED1_Pin, OUTPUT);
 
     targetInit();
     digitalWrite(LED1_Pin, HIGH);

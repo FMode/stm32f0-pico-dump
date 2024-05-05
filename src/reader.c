@@ -28,8 +28,8 @@ swdStatus_t extractFlashData(uint32_t const address, uint32_t* const data) {
         digitalWrite(LED1_Pin, LOW);
 
         targetPowerOn();
+        delay(1);
 
-        delay(5);
 
         dbgStatus = swdInit(&idCode);
 
@@ -46,14 +46,14 @@ swdStatus_t extractFlashData(uint32_t const address, uint32_t* const data) {
         }
 
         if (dbgStatus == swdStatusOk) {
-            targetRestore();
+            //targetRestore();
             delay(delayJitter);
 
             /* The magic happens here! */
             dbgStatus = swdReadAHBAddr((address & 0xFFFFFFFCu), &extractedData);
         }
 
-        targetReset();
+        //targetReset();
 
         /* Check whether readout was successful. Only if swdStatusOK is returned, extractedData is valid */
         if (dbgStatus == swdStatusOk) {
@@ -70,11 +70,7 @@ swdStatus_t extractFlashData(uint32_t const address, uint32_t* const data) {
 
         targetPowerOff();
 
-        delay(1);
-        targetRestore();
-        delay(2);
-        targetReset();
-        delay(1);
+        delay(10);
 
     } while ((dbgStatus != swdStatusOk) && (numReadAttempts < (MAX_READ_ATTEMPTS)));
 

@@ -34,7 +34,7 @@
 
 void targetInit(void);
 
-void targetReset(void);
+//void targetReset(void);
 
 void targetRestore(void);
 
