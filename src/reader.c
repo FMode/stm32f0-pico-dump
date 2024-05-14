@@ -71,6 +71,8 @@ swdStatus_t extractFlashData(uint32_t const address, uint32_t* const data) {
         targetPowerOff();
 
         delay(10);
+        //only power off target
+        //no reset because target could be pseudo-powered via RESET
 
     } while ((dbgStatus != swdStatusOk) && (numReadAttempts < (MAX_READ_ATTEMPTS)));
 

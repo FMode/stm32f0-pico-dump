@@ -15,11 +15,11 @@ extern "C" {
 }
 
 // STM32 target flash memory size in bytes
-uint32_t size = 32768*6;
+uint32_t size = 32768;
 
 // Usually the STM32F0x starts here.
 // If you're trying to dump another series check the datasheet.
-uint32_t flashAddress = 0x08010000; 
+uint32_t flashAddress = 0x08000000; 
                         
 
 void setup() {

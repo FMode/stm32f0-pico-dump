@@ -152,6 +152,8 @@ static void swdReset(void) {
 
     swdDatasend(jtag2swd, 16u);
 
+    // add reset sequence again
+    
     /* 50 clk+x */
     for (i = 0u; i < (50u + 10u); ++i) {
         digitalWrite(SWCLK_Pin, HIGH);

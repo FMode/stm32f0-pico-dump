@@ -11,6 +11,7 @@
 
 void targetInit(void) {
     targetPowerOff();
+    //remove reset because target can be pseudo-powered via the reset line or any gpio pin!
     //targetReset();
 }
 
